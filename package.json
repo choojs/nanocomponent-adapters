@@ -1,0 +1,22 @@
+{
+  "name": "nanocomponent-to-webcomponent",
+  "description": "Convert a nanocomponent to a webcomponent",
+  "repository": "yoshuawuyts/nanocomponent-to-webcomponent",
+  "version": "1.0.0",
+  "scripts": {
+    "deps": "dependency-check . && dependency-check . --extra --no-dev",
+    "start": "node .",
+    "test": "standard && npm run deps"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "dependency-check": "^2.7.0",
+    "standard": "^8.6.0"
+  },
+  "keywords": [
+    "nanocomponent",
+    "custom-element",
+    "webcomponent",
+    "custom-elements"
+  ]
+}
