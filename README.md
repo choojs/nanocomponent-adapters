@@ -16,6 +16,7 @@ frameworks support are very welcome!
 - Angular
 - Ember
 - Cycle
+- Vue
 - Inferno
 - Elm
 
