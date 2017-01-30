@@ -70,6 +70,7 @@ render(<Button />, document.body);
 ## React
 ```jsx
 var toReact = require('nanocomponent-adapters/react')
+var component = require('nanocomponent')
 var reactDom = require('react-dom')
 
 // create new nanocomponent
