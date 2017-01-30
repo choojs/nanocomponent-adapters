@@ -61,7 +61,7 @@ var Button = component({
   }
 })
 
-Button = toPreact(Button)
+Button = toPreact(Button, preact)
 
 // render an instance of Button into <body>:
 render(<Button />, document.body);
@@ -72,6 +72,7 @@ render(<Button />, document.body);
 var toReact = require('nanocomponent-adapters/react')
 var component = require('nanocomponent')
 var reactDom = require('react-dom')
+var react = require('react')
 
 // create new nanocomponent
 var Button = component({
@@ -82,7 +83,7 @@ var Button = component({
   }
 })
 
-Button = toReact(Button)
+Button = toReact(Button, react)
 ReactDOM.render(<Button />, mountNode)
 ```
 
