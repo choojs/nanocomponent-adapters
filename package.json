@@ -1,7 +1,7 @@
 {
-  "name": "nanocomponent-to-webcomponent",
-  "description": "Convert a nanocomponent to a webcomponent",
-  "repository": "yoshuawuyts/nanocomponent-to-webcomponent",
+  "name": "nanocomponent-adapters",
+  "description": "Adapters to make nanocomponent run natively inside frameworks",
+  "repository": "yoshuawuyts/nanocomponent-adapters",
   "version": "1.1.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
