@@ -2,7 +2,7 @@
   "name": "nanocomponent-to-webcomponent",
   "description": "Convert a nanocomponent to a webcomponent",
   "repository": "yoshuawuyts/nanocomponent-to-webcomponent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "NODE_ENV=production bankai example --open",
