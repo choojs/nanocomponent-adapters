@@ -10,7 +10,7 @@ all frameworks.
 Not all languages and frameworks are supported yet; PRs to support more
 frameworks support are very welcome!
 - [Custom Elements (webcomponents)](#custom-elements-webcomponents)
-- React
+- [React](#react)
 - [Preact](#preact)
 - [Choo](#choo)
 - Angular
@@ -65,6 +65,24 @@ Button = toPreact(Button)
 
 // render an instance of Button into <body>:
 render(<Button />, document.body);
+```
+
+## React
+```jsx
+var toReact = require('nanocomponent-adapters/react')
+var reactDom = require('react-dom')
+
+// create new nanocomponent
+var Button = component({
+  render: function (data) {
+    return html`
+      <button>hello planet</button>
+    `
+  }
+})
+
+Button = toReact(Button)
+ReactDOM.render(<Button />, mountNode)
 ```
 
 ## Choo

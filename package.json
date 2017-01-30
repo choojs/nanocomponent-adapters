@@ -5,12 +5,16 @@
   "version": "1.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
-    "start": "node .",
+    "start": "NODE_ENV=production bankai example --open",
     "test": "standard && npm run deps"
   },
   "dependencies": {},
   "devDependencies": {
+    "bankai": "^5.2.1",
     "dependency-check": "^2.7.0",
+    "nanocomponent": "^1.1.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "standard": "^8.6.0"
   },
   "keywords": [
