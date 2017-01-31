@@ -44,7 +44,7 @@ var button = document.createElement('button', 'custom-button')
 document.body.appendChild(button)
 ```
 
-## Preact (to be implemented)
+## Preact
 ```js
 var toPreact = require('nanocomponent-adapters/preact')
 var component = require('nanocomponent')
