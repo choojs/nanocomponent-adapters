@@ -10,32 +10,37 @@ function toPreact (component, preact) {
   var props = null
   var node = null
 
-  class clx extends preact.Component {
-    shouldComponentUpdate (nextProps) {
-      return false
-    }
+  function setRef (_node) {
+    node = _node
+  }
 
-    componentDidMount () {
-      if (!element) {
-        element = component(props)
-        node.appendChild(element)
-      }
-    }
+  function Clx () {
+    preact.Component.apply(this, arguments)
+  }
 
-    componentWillReceiveProps (nwProps) {
-      props = nwProps
-      if (element) element(props)
-    }
+  Clx.prototype = Object.create(preact.Component)
+  Clx.prototype.constructor = preact.Component
 
-    setRef (_node) {
-      node = _node
-    }
-
-    render (_props) {
-      props = _props
-      return preact.h('div', { ref: this.setRef })
+  Clx.prototype.componentDidMount = function componentDidMount () {
+    if (!element) {
+      element = component(props)
+      node.appendChild(element)
     }
   }
 
-  return clx
+  Clx.prototype.componentWillReceiveProps = function componentWillReceiveProps (nwProps) {
+    props = nwProps
+    if (element) element(props)
+  }
+
+  Clx.prototype.shouldComponentUpdate = function shouldComponentUpdate () {
+    return false
+  }
+
+  Clx.prototype.render = function render (_props) {
+    props = _props
+    return preact.h('div', { ref: setRef })
+  }
+
+  return Clx
 }
