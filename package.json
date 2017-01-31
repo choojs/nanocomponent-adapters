@@ -2,7 +2,7 @@
   "name": "nanocomponent-adapters",
   "description": "Adapters to make nanocomponent run natively inside frameworks",
   "repository": "yoshuawuyts/nanocomponent-adapters",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "NODE_ENV=production bankai example --open",
