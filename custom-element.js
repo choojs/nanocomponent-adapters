@@ -8,7 +8,7 @@ function toCustomElement (component, name) {
   assert.equal(typeof name, 'string', 'nanocomponent-adapters/custom-elements: name should be type string')
 
   var protoName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-  protoName = 'HTML' + protoName + 'Elemement'
+  protoName = 'HTML' + protoName + 'Element'
   var protoEl = window[protoName] || window.HTMLElement
   var proto = Object.create(protoEl)
 
