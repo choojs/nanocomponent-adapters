@@ -18,7 +18,7 @@ frameworks support are very welcome!
 - Cycle
 - Vue
 - Inferno
-- Elm
+- [Elm](#elm)
 
 ## Custom Elements (webcomponents)
 ```js
@@ -114,6 +114,48 @@ mainView (state, prev, send) {
     </section>
   `
 }
+```
+
+## Elm
+To integrate JS components with Elm, it's common to use [custom
+elements](#custom-elements-webcomponents). This requires you to create the
+components in a javascript file. This works well because the state in
+nanocomponents is isolated from the elm code; e.g. it doesn't talk back to Elm
+code.
+
+```js
+// index.js
+var toCustomElement = require('nanocomponent-adapters/custom-element')
+var component = require('nanocomponent')
+var html = require('bel')
+
+// create new nanocomponent
+var Button = component({
+  render: function (data) {
+    return html`
+      <button>hello planet</button>
+    `
+  }
+})
+
+// register as custom element
+Button = toCustomElement(customButton, 'button')
+document.registerElement('custom-button', Button)
+```
+
+```elm
+-- Component.elm
+main =
+  node "custom-button" [] []
+```
+```html
+<div id="main"></div>
+<script src="component.js"></script>
+<script src="index.js"></script>
+<script>
+  var node = document.getElementById('body')
+  var app = Elm.Component.embed(node)
+</script>
 ```
 
 ## See Also
