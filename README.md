@@ -22,6 +22,7 @@ frameworks support are very welcome!
 - [Elm](#elm)
 
 ## Custom Elements (webcomponents-v0)
+### Warning: v0 API is [deprecated in favor of v1](https://developers.google.com/web/fundamentals/getting-started/primers/customelements)
 ```js
 var toCustomElement = require('nanocomponent-adapters/custom-element-v0')
 var component = require('nanocomponent')
