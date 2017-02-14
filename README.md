@@ -9,20 +9,21 @@ all frameworks.
 ## Table of Contents
 Not all languages and frameworks are supported yet; PRs to support more
 frameworks support are very welcome!
-- [Custom Elements (webcomponents)](#custom-elements-webcomponents)
+- [Custom Elements (webcomponents-v0)](#custom-elements-webcomponents-v0)
+- [Custom Elements (webcomponents-v1)](#custom-elements-webcomponents-v1)
 - [React](#react)
 - [Preact](#preact)
 - [Choo](#choo)
-- Angular
+- [Angular](#angular)
 - Ember
 - Cycle
 - Vue
 - Inferno
 - [Elm](#elm)
 
-## Custom Elements (webcomponents)
+## Custom Elements (webcomponents-v0)
 ```js
-var toCustomElement = require('nanocomponent-adapters/custom-element')
+var toCustomElement = require('nanocomponent-adapters/custom-element-v0')
 var component = require('nanocomponent')
 var html = require('bel')
 
@@ -36,13 +37,68 @@ var Button = component({
 })
 
 // register as custom element
-Button = toCustomElement(customButton, 'button')
-document.registerElement('custom-button', Button)
+// The second parameter corresponds to a string Array containing the names of the attributes you'd like to observe and react to changes.
+var CustomButton = toCustomElement(Button, ['title'])
+document.registerElement('custom-button', CustomButton)
 
 // create new custom-button
-var button = document.createElement('button', 'custom-button')
+var button = document.createElement('custom-button')
 document.body.appendChild(button)
 ```
+
+## Custom Elements (webcomponents-v1)
+```js
+var toCustomElementV1 = require('nanocomponent-adapters/custom-element-v1')
+var component = require('nanocomponent')
+var html = require('bel')
+
+// create new nanocomponent
+var Button = component({
+  render: function (data) {
+    return html`
+      <button>hello planet</button>
+    `
+  }
+})
+
+// register as custom element
+// The second parameter corresponds to a string Array containing the names of the attributes you'd like to observe and react to changes.
+var CustomButton = toCustomElement(Button, ['title']);
+customElements.define('custom-button', CustomButton);
+// create new custom-button
+var button = document.createElement('custom-button')
+document.body.appendChild(button)
+```
+
+## Angular
+```js
+// Register a custom element using either v0 or v1 APIs
+// Then, in your module file remember to import and provide the CUSTOM_ELEMENTS_SCHEMA
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+/*
+You can now use the custom element in either a standalone or inline template
+*/
+
+`<custom-widget [attr.title]="title"></custom-widget>` *
+```
+*Remember to use attr.{attribute_name} instead of just the {attribute_name}, since, in Angular, the latter corresponds to a property, not an attribute.
+See [HTML attribute vs. DOM property](https://angular.io/docs/ts/latest/guide/template-syntax.html)
 
 ## Preact
 ```js
