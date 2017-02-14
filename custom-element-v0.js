@@ -1,5 +1,6 @@
 var assert = require('assert')
 var xtend = require('xtend')
+var includes = require('array-includes');
 
 module.exports = toCustomElement
 
