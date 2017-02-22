@@ -1,13 +1,13 @@
 var assert = require('assert')
 var xtend = require('xtend')
-var includes = require('array-includes');
+var includes = require('array-includes')
 
 module.exports = toCustomElement
 
 function toCustomElement (component, attrs) {
-  if (!attrs) { attrs = []; }
+  if (!attrs) { attrs = [] }
   assert.equal(typeof component, 'function', 'nanocomponent-adapters/custom-elements: component should be type object')
-  assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/custom-elements-v1: attrs should be type Array');
+  assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/custom-elements-v1: attrs should be type Array')
 
   var createdCallback = function () {
     this.state = null
@@ -15,17 +15,17 @@ function toCustomElement (component, attrs) {
   }
 
   var attachedCallback = function () {
-    var newState = {};
+    var newState = {}
     if (this.hasAttributes()) {
-      var mattrs = this.attributes;
+      var mattrs = this.attributes
       for (var i = 0, len = mattrs.length; i < len; i++) {
         if (includes(attrs, mattrs[i].name)) {
           newState[mattrs[i].name] = mattrs[i].value
         }
       }
     }
-    this.state = newState;
-    render.call(this);
+    this.state = newState
+    render.call(this)
   }
 
   var detachedCallback = function () {
@@ -34,24 +34,24 @@ function toCustomElement (component, attrs) {
 
   var attributeChangedCallback = function (attr, oldVal, newVal) {
     if (includes(attrs, attr)) {
-      var newState = {};
+      var newState = {}
       newState[attr] = newVal
-      this.state = xtend(this.state, newState);
-      render.call(this);
+      this.state = xtend(this.state, newState)
+      render.call(this)
     }
   }
 
-  var render = function() {
+  var render = function () {
     if (!this.childNodes.length) {
-      this.appendChild(component(this.state));
+      this.appendChild(component(this.state))
     } else {
-      component(this.state);
+      component(this.state)
     }
   }
 
   return {
     prototype: Object.create(
-      HTMLElement.prototype,
+      window.HTMLElement.prototype,
       {
         createdCallback: { value: createdCallback },
         attachedCallback: { value: attachedCallback },
