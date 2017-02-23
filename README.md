@@ -72,9 +72,19 @@ document.body.appendChild(button)
 ```
 
 ## Angular
+
+Angular is able to leverage native Custom Elements inside its templates so the integration should be pretty straightforward.
+Fist, you can follow the instructions for [Custom Elements (webcomponents-v1)](#custom-elements-webcomponents-v1) or
+[Custom Elements (webcomponents-v0)](#custom-elements-webcomponents-v0) to register your nanocomponent as a Custom Element.
+
+Once you've done that:
+* Head to your Angular project
+* Open the main NgModule (the one you bootstrap)
+* Import and provide the CUSTOM_ELEMENTS_SCHEMA
+
+You're done, after providing the schema you should be able to use the native custom element in any template.
+
 ```js
-// Register a custom element using either v0 or v1 APIs
-// Then, in your module file remember to import and provide the CUSTOM_ELEMENTS_SCHEMA
 
 // You can either use the TypeScript version
 import { BrowserModule } from '@angular/platform-browser';
