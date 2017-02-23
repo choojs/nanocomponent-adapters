@@ -74,7 +74,7 @@ document.body.appendChild(button)
 ## Angular
 
 Angular is able to leverage native Custom Elements inside its templates so the integration should be pretty straightforward.
-Fist, you can follow the instructions for [Custom Elements (webcomponents-v1)](#custom-elements-webcomponents-v1) or
+First, you can follow the instructions for [Custom Elements (webcomponents-v1)](#custom-elements-webcomponents-v1) or
 [Custom Elements (webcomponents-v0)](#custom-elements-webcomponents-v0) to register your nanocomponent as a Custom Element.
 
 Once you've done that:
