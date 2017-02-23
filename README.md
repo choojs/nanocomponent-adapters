@@ -75,6 +75,8 @@ document.body.appendChild(button)
 ```js
 // Register a custom element using either v0 or v1 APIs
 // Then, in your module file remember to import and provide the CUSTOM_ELEMENTS_SCHEMA
+
+// You can either use the TypeScript version
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -87,10 +89,26 @@ import { AppComponent } from './app.component';
     BrowserModule
   ],
   providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
+
+// or the vanilla JS version
+
+(function(app) {
+  app.AppModule =
+    ng.core.NgModule({
+      imports: [ ng.platformBrowser.BrowserModule ],
+      declarations: [ app.AppComponent ],
+      schemas: [ ng.core.CUSTOM_ELEMENTS_SCHEMA ],
+      bootstrap: [ app.AppComponent ]
+    })
+    .Class({
+      constructor: function() {}
+    });
+})(window.app || (window.app = {}));
+
 
 /*
 You can now use the custom element in either a standalone or inline template
