@@ -10,8 +10,8 @@ all frameworks.
 Not all languages and frameworks are supported yet; PRs to support more
 frameworks support are very welcome!
 - [Custom Elements (webcomponents)](#custom-elements-webcomponents)
-- [React](#react)
 - [Preact](#preact)
+- [React](#react)
 - [Choo](#choo)
 - Angular
 - Ember
