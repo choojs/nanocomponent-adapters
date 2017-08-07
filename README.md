@@ -31,6 +31,7 @@ var render = preact.render
 
 class Button extends Nanocomponent {
   constructor () {
+    super()
     this.color = null
   }
 
@@ -67,6 +68,7 @@ var react = require('react')
 
 class Button extends Nanocomponent {
   constructor () {
+    super()
     this.color = null
   }
 
@@ -104,6 +106,7 @@ var choo = require('choo')
 // create new nanocomponent
 class Button extends Nanocomponent {
   constructor () {
+    super()
     this.color = null
   }
 
