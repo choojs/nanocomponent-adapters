@@ -2,13 +2,13 @@ var assert = require('assert')
 
 module.exports = toPreact
 
-function toPreact (component, preact) {
-  assert.equal(typeof component, 'function', 'nanocomponent-adapters/preact: component should be type function')
+function toPreact (Component, preact) {
+  assert.equal(typeof Component, 'function', 'nanocomponent-adapters/preact: component should be type function')
   assert.equal(typeof preact, 'object', 'nanocomponent-adapters/preact: preact should be type object')
 
-  var element = null
   var props = null
   var node = null
+  var comp = new Component()
 
   function setRef (_node) {
     node = _node
@@ -22,15 +22,15 @@ function toPreact (component, preact) {
   Clx.prototype.constructor = preact.Component
 
   Clx.prototype.componentDidMount = function componentDidMount () {
-    if (!element) {
-      element = component(props)
-      node.appendChild(element)
+    if (!comp.element) {
+      var el = comp.render(props)
+      node.appendChild(el)
     }
   }
 
   Clx.prototype.componentWillReceiveProps = function componentWillReceiveProps (nwProps) {
     props = nwProps
-    if (element) element(props)
+    if (comp.element) comp.render(props)
   }
 
   Clx.prototype.shouldComponentUpdate = function shouldComponentUpdate () {

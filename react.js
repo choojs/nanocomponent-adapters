@@ -2,13 +2,13 @@ var assert = require('assert')
 
 module.exports = toReact
 
-function toReact (component, react) {
-  assert.equal(typeof component, 'function', 'nanocomponent-adapters/react: component should be type function')
+function toReact (Component, react) {
+  assert.equal(typeof Component, 'function', 'nanocomponent-adapters/react: component should be type function')
   assert.equal(typeof react, 'object', 'nanocomponent-adapters/react: react should be type object')
 
-  var element = null
   var props = null
   var node = null
+  var comp = new Component()
 
   var clx = react.createClass({
     shouldComponentUpdate: function (nextProps) {
@@ -16,12 +16,12 @@ function toReact (component, react) {
     },
     componentWillReceiveProps: function (nwProps) {
       props = nwProps
-      if (element) element(props)
+      if (comp.element) comp.render(props)
     },
     componentDidMount: function () {
-      if (!element) {
-        element = component(props)
-        node.appendChild(element)
+      if (!comp.element) {
+        var el = comp.render(props)
+        node.appendChild(el)
       }
     },
     setRef: function (_node) {
