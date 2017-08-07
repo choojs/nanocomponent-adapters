@@ -91,7 +91,7 @@ class Button extends Nanocomponent {
 }
 
 var ReactButton = toReact(Button, react)
-ReactDOM.render(<Button color='white' />, mountNode)
+ReactDOM.render(<ReactButton color='white' />, mountNode)
 ```
 
 ## Choo
