@@ -6,29 +6,28 @@ function toReact (Component, react) {
   assert.equal(typeof Component, 'function', 'nanocomponent-adapters/react: component should be type function')
   assert.equal(typeof react, 'object', 'nanocomponent-adapters/react: react should be type object')
 
-  var props = null
-  var node = null
-  var comp = new Component()
-
   var clx = react.createClass({
+    getInitialState: function () {
+      this.node = null
+      this.comp = new Component()
+      return {}
+    },
     shouldComponentUpdate: function (nextProps) {
       return false
     },
     componentWillReceiveProps: function (nwProps) {
-      props = nwProps
-      if (comp.element) comp.render(props)
+      if (this.comp.element) this.comp.render(nwProps)
     },
     componentDidMount: function () {
-      if (!comp.element) {
-        var el = comp.render(props)
-        node.appendChild(el)
+      if (!this.comp.element) {
+        var el = this.comp.render(this.props)
+        this.node.appendChild(el)
       }
     },
     setRef: function (_node) {
-      node = _node
+      this.node = _node
     },
     render: function () {
-      props = this.props
       return react.createElement('div', { ref: this.setRef })
     }
   })
