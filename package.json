@@ -1,7 +1,7 @@
 {
   "name": "nanocomponent-adapters",
   "description": "Adapters to make nanocomponent run natively inside frameworks",
-  "repository": "yoshuawuyts/nanocomponent-adapters",
+  "repository": "choojs/nanocomponent-adapters",
   "version": "2.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
