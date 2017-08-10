@@ -49,7 +49,7 @@ class Button extends Nanocomponent {
   }
 
   update ({color}) {
-    return newColor !== this.color
+    return color !== this.color
   }
 }
 
@@ -86,7 +86,7 @@ class Button extends Nanocomponent {
   }
 
   update ({color}) {
-    return newColor !== this.color
+    return color !== this.color
   }
 }
 
@@ -124,7 +124,7 @@ class Button extends Nanocomponent {
   }
 
   update (color) {
-    return newColor !== this.color
+    return color !== this.color
   }
 }
 
