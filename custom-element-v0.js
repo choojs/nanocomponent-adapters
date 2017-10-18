@@ -1,51 +1,43 @@
 var assert = require('assert')
-var xtend = require('xtend')
-var includes = require('array-includes')
 
 module.exports = toCustomElement
 
-function toCustomElement (component, attrs) {
+function toCustomElement (Nanocomponent, attrs) {
   if (!attrs) { attrs = [] }
-  assert.equal(typeof component, 'function', 'nanocomponent-adapters/custom-elements: component should be type object')
+  assert.equal(typeof Nanocomponent, 'function', 'nanocomponent-adapters/custom-elements: component should be type object')
   assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/custom-elements-v1: attrs should be type Array')
 
   var createdCallback = function () {
-    this.state = null
-    this.component = null
+    this.props = {}
+    this.comp = new Nanocomponent()
   }
 
   var attachedCallback = function () {
-    var newState = {}
+    var newProps = {}
     if (this.hasAttributes()) {
       var mattrs = this.attributes
       for (var i = 0, len = mattrs.length; i < len; i++) {
-        if (includes(attrs, mattrs[i].name)) {
-          newState[mattrs[i].name] = mattrs[i].value
+        if (attrs.includes(mattrs[i].name)) {
+          newProps[mattrs[i].name] = mattrs[i].value
         }
       }
     }
-    this.state = newState
-    render.call(this)
-  }
-
-  var detachedCallback = function () {
-    this.state = null
-  }
-
-  var attributeChangedCallback = function (attr, oldVal, newVal) {
-    if (includes(attrs, attr)) {
-      var newState = {}
-      newState[attr] = newVal
-      this.state = xtend(this.state, newState)
-      render.call(this)
+    this.props = newProps
+    if (!this.comp.element) {
+      var el = this.comp.render(this.props)
+      this.appendChild(el)
     }
   }
 
-  var render = function () {
-    if (!this.childNodes.length) {
-      this.appendChild(component(this.state))
-    } else {
-      component(this.state)
+  var detachedCallback = function () {
+    this.props = null
+    this.comp = null
+  }
+
+  var attributeChangedCallback = function (attr, oldVal, newVal) {
+    if (attrs.includes(attr)) {
+      this.props[attr] = newVal
+      if (this.comp.element) this.comp.render(this.props)
     }
   }
 

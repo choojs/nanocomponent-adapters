@@ -73,61 +73,62 @@ document.body.appendChild(button)
 
 ## Angular
 
-Angular is able to leverage native Custom Elements inside its templates so the integration should be pretty straightforward.
-First, you can follow the instructions for [Custom Elements (webcomponents-v1)](#custom-elements-webcomponents-v1) or
-[Custom Elements (webcomponents-v0)](#custom-elements-webcomponents-v0) to register your nanocomponent as a Custom Element.
-
-Once you've done that:
-* Head to your Angular project
-* Open the main NgModule (the one you bootstrap)
-* Import and provide the CUSTOM_ELEMENTS_SCHEMA
-
-You're done, after providing the schema you should be able to use the native custom element in any template.
-
 ```js
 
-// You can either use the TypeScript version
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import * core from '@angular/core';
+import * as toAngular from 'nanocomponent-adapters/angular';
+import * as Nanocomponent from 'nanocomponent';
+import * as html from 'bel';
+
+class Button extends Nanocomponent {
+  constructor () {
+    super()
+    this.color = null
+  }
+
+  handleClick () {
+    console.log('choo choo!')
+  }
+
+  createElement ({color}) {
+    this.color = color
+    return html`
+      <button onclick=${this.handleClick} style="background-color: ${color}">
+        Click Me
+      </button>
+    `
+  }
+
+  update ({color}) {
+    return color !== this.color
+  }
+}
+
+const component: any = toAngular(Button, 'custom-button', ['color'], core);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    component
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
 
-// or the vanilla JS version
-
-(function(app) {
-  app.AppModule =
-    ng.core.NgModule({
-      imports: [ ng.platformBrowser.BrowserModule ],
-      declarations: [ app.AppComponent ],
-      schemas: [ ng.core.CUSTOM_ELEMENTS_SCHEMA ],
-      bootstrap: [ app.AppComponent ]
-    })
-    .Class({
-      constructor: function() {}
-    });
-})(window.app || (window.app = {}));
-
-
 /*
-You can now use the custom element in either a standalone or inline template
+You can now use the component in either a standalone or inline template
 */
 
-`<custom-widget [attr.title]="title"></custom-widget>` *
+`<custom-button [color]="color"></custom-button>`
 ```
-*Remember to use attr.{attribute_name} instead of just the {attribute_name}, since, in Angular, the latter corresponds to a property, not an attribute.
-See [HTML attribute vs. DOM property](https://angular.io/docs/ts/latest/guide/template-syntax.html)
+
 
 ## Preact
 ```js
