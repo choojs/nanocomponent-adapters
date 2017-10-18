@@ -1,8 +1,8 @@
 {
   "name": "nanocomponent-adapters",
   "description": "Adapters to make nanocomponent run natively inside frameworks",
-  "repository": "yoshuawuyts/nanocomponent-adapters",
-  "version": "1.2.1",
+  "repository": "choojs/nanocomponent-adapters",
+  "version": "2.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "NODE_ENV=production bankai example --open",
@@ -10,12 +10,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "bankai": "^5.2.1",
+    "bankai": "^8.1.1",
     "dependency-check": "^2.7.0",
-    "nanocomponent": "^1.1.0",
+    "nanocomponent": "^6.0.0-1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "standard": "^8.6.0"
+    "standard": "^10.0.3"
   },
   "keywords": [
     "nanocomponent",
