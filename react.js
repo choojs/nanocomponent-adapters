@@ -14,7 +14,7 @@ function toReact (Component, react) {
   }
 
   Clx.prototype = Object.create(react.Component.prototype)
-  Clx.prototype.constructor = react.Component
+  Clx.prototype.constructor = Clx
 
   Clx.prototype.componentDidMount = function componentDidMount () {
     if (!this.comp.element) {
