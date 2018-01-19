@@ -9,8 +9,7 @@ all frameworks.
 ## Table of Contents
 Not all languages and frameworks are supported yet; PRs to support more
 frameworks support are very welcome!
-- [Preact](#preact)
-- [React](#react)
+- [React / Preact](#react-preact)
 - [Choo](#choo)
 - [Angular](#angular)
 - Ember
@@ -128,53 +127,16 @@ You can now use the component in either a standalone or inline template
 
 `<custom-button [color]="color"></custom-button>`
 ```
+<a name="preact"></a>
+<a name="react"></a>
+## React / Preact
 
-
-## Preact
-```js
-var toPreact = require('nanocomponent-adapters/preact')
-var Nanocomponent = require('nanocomponent')
-var preact = require('preact')
-var html = require('bel')
-
-var render = preact.render
-
-class Button extends Nanocomponent {
-  constructor () {
-    super()
-    this.color = null
-  }
-
-  handleClick () {
-    console.log('choo choo!')
-  }
-
-  createElement ({color}) {
-    this.color = color
-    return html`
-      <button onclick=${this.handleClick} style="background-color: ${color}">
-        Click Me
-      </button>
-    `
-  }
-
-  update ({color}) {
-    return color !== this.color
-  }
-}
-
-var PreactButton = toPreact(Button, preact)
-
-// render an instance of Button into <body>:
-render(<PreactButton color='red'/>, document.body);
-```
-
-## React
 ```js
 var toReact = require('nanocomponent-adapters/react')
 var Nanocomponent = require('nanocomponent')
 var reactDom = require('react-dom')
 var react = require('react')
+var html = require('bel')
 
 class Button extends Nanocomponent {
   constructor () {
@@ -201,7 +163,16 @@ class Button extends Nanocomponent {
 }
 
 var ReactButton = toReact(Button, react)
-ReactDOM.render(<ReactButton color='white' />, mountNode)
+reactDom.render(<ReactButton color='white' />, mountNode)
+```
+
+It's very similar with Preact, or any other React-like library that exposes a
+`Component` base class and a `createElement` function:
+
+```js
+var preact = require('preact')
+var PreactButton = toReact(Button, preact)
+preact.render(<PreactButton color='hotpink' />, document.body)
 ```
 
 ## Choo
