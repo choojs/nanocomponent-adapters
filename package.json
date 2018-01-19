@@ -10,13 +10,15 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@angular/core": "^4.4.5",
     "bankai": "^8.1.1",
     "dependency-check": "^2.7.0",
     "nanocomponent": "^6.0.0-1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "standard": "^10.0.3"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=2.0.0"
   },
   "keywords": [
     "nanocomponent",

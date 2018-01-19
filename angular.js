@@ -1,15 +1,13 @@
 var assert = require('assert')
+var {Component, ChangeDetectorRef, ViewChild, ElementRef, ChangeDetectionStrategy, Input} = require('@angular/core')
 
 module.exports = toAngular
 
-function toAngular (Nanocomponent, selector, attrs, angular) {
+function toAngular (Nanocomponent, selector, attrs) {
   if (!attrs) { attrs = [] }
   assert.equal(typeof Nanocomponent, 'function', 'nanocomponent-adapters/angular: component should be type object')
   assert.equal(typeof selector, 'string', 'nanocomponent-adapters/angular: selector should be type string')
   assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/angular: attrs should be type Array')
-  assert.equal(typeof angular, 'object', 'nanocomponent-adapters/angular: angular should be type object')
-
-  var {Component, ChangeDetectorRef, ViewChild, ElementRef, ChangeDetectionStrategy, Input} = angular
 
   var NewComponent = function (cd) {
     this.cd = cd
