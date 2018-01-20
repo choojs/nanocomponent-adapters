@@ -1,9 +1,8 @@
 var assert = require('assert')
-var {Component, ChangeDetectorRef, ViewChild, ElementRef, ChangeDetectionStrategy, Input} = require('@angular/core')
 
 module.exports = toAngular
 
-function toAngular (Nanocomponent, selector, attrs) {
+function toAngular (Nanocomponent, selector, attrs, angular) {
   if (!attrs) { attrs = [] }
   assert.equal(typeof Nanocomponent, 'function', 'nanocomponent-adapters/angular: component should be type object')
   assert.equal(typeof selector, 'string', 'nanocomponent-adapters/angular: selector should be type string')
@@ -18,19 +17,19 @@ function toAngular (Nanocomponent, selector, attrs) {
   NewComponent.prototype = {}
 
   NewComponent.annotations = [
-    new Component({
+    new angular.Component({
       selector: selector,
       template: '<div #target></div>',
-      changeDetection: ChangeDetectionStrategy.OnPush
+      changeDetection: angular.ChangeDetectionStrategy.OnPush
     })
   ]
-  NewComponent.parameters = [[ChangeDetectorRef]]
+  NewComponent.parameters = [[angular.ChangeDetectorRef]]
   var propMetadata = {
-    'target': [new ViewChild('target', { 'read': ElementRef })]
+    'target': [new angular.ViewChild('target', { 'read': angular.ElementRef })]
   }
 
   attrs.forEach(function (key) {
-    propMetadata[key] = [new Input(key)]
+    propMetadata[key] = [new angular.Input(key)]
   })
 
   NewComponent.propMetadata = propMetadata
