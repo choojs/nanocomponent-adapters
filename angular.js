@@ -21,12 +21,12 @@ function toAngular (Nanocomponent, selector, attrs, angular) {
     template: '',
     changeDetection: angular.ChangeDetectionStrategy.OnPush,
     inputs: attrs
-  });
+  })
 
   var NewComponent = DecorateWith(NewComponent)
 
-  NewComponent.parameters = [angular.ChangeDetectorRef, angular.ElementRef];
-  
+  NewComponent.parameters = [angular.ChangeDetectorRef, angular.ElementRef]
+
   NewComponent.prototype = {}
 
   NewComponent.prototype.constructor = NewComponent
