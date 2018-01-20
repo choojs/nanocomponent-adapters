@@ -4,44 +4,32 @@ module.exports = toAngular
 
 function toAngular (Nanocomponent, selector, attrs, angular) {
   if (!attrs) { attrs = [] }
-  assert.equal(typeof Nanocomponent, 'function', 'nanocomponent-adapters/angular: component should be type object')
+  assert.equal(typeof Nanocomponent, 'function', 'nanocomponent-adapters/angular: component should be type function')
   assert.equal(typeof selector, 'string', 'nanocomponent-adapters/angular: selector should be type string')
-  assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/angular: attrs should be type Array')
+  assert.equal(typeof attrs, 'object', 'nanocomponent-adapters/angular: attrs should be type array')
+  assert.equal(typeof angular, 'object', 'nanocomponent-adapters/angular: angular should be type object')
 
-  var NewComponent = function (cd) {
+  var NewComponent = function (cd, node) {
     this.cd = cd
-    this.node = null
+    this.node = node.nativeElement
     this.comp = new Nanocomponent()
     this.props = {}
   }
+
+  var DecorateWith = angular.Component({
+    selector: selector,
+    template: '',
+    changeDetection: angular.ChangeDetectionStrategy.OnPush,
+    inputs: attrs
+  });
+
+  var NewComponent = DecorateWith(NewComponent)
+
+  NewComponent.parameters = [angular.ChangeDetectorRef, angular.ElementRef];
+  
   NewComponent.prototype = {}
 
-  NewComponent.annotations = [
-    new angular.Component({
-      selector: selector,
-      template: '<div #target></div>',
-      changeDetection: angular.ChangeDetectionStrategy.OnPush
-    })
-  ]
-  NewComponent.parameters = [[angular.ChangeDetectorRef]]
-  var propMetadata = {
-    'target': [new angular.ViewChild('target', { 'read': angular.ElementRef })]
-  }
-
-  attrs.forEach(function (key) {
-    propMetadata[key] = [new angular.Input(key)]
-  })
-
-  NewComponent.propMetadata = propMetadata
-
   NewComponent.prototype.constructor = NewComponent
-
-  Object.defineProperty(NewComponent.prototype, 'target', {
-    set: function (el) {
-      this.node = el.nativeElement
-    },
-    get: function () { return this.node }
-  })
 
   NewComponent.prototype.ngOnChanges = function (changes) {
     var _this = this
