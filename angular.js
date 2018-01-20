@@ -23,7 +23,7 @@ function toAngular (Nanocomponent, selector, attrs, angular) {
     inputs: attrs
   })
 
-  var NewComponent = DecorateWith(NewComponent)
+  NewComponent = DecorateWith(NewComponent)
 
   NewComponent.parameters = [angular.ChangeDetectorRef, angular.ElementRef]
 
