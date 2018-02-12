@@ -10,6 +10,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@angular/core": "^2.0.0",
     "bankai": "^8.1.1",
     "dependency-check": "^2.7.0",
     "nanocomponent": "^6.0.0-1",
