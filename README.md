@@ -11,6 +11,7 @@ Not all languages and frameworks are supported yet; PRs to support more
 frameworks support are very welcome!
 - [React / Preact](#react-preact)
 - [Choo](#choo)
+- [Angular.js](#angular.js)
 - [Angular](#angular)
 - Ember
 - Cycle
@@ -69,6 +70,10 @@ customElements.define('custom-button', CustomButton);
 var button = document.createElement('custom-button')
 document.body.appendChild(button)
 ```
+
+## Angular.js
+
+See [nanocomponent-adapters-angularjs](https://github.com/kareniel/nanocomponent-adapters-angularjs).
 
 ## Angular
 

@@ -8,7 +8,9 @@
     "start": "NODE_ENV=production bankai example --open",
     "test": "standard && npm run deps"
   },
-  "dependencies": {},
+  "dependencies": {
+    "nanocomponent-adapters-angularjs": "^1.0.0"
+  },
   "devDependencies": {
     "@angular/core": "^2.0.0",
     "bankai": "^8.1.1",
