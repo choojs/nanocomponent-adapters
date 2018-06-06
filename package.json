@@ -5,10 +5,11 @@
   "version": "3.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
-    "start": "NODE_ENV=production bankai example --open",
+    "start": "NODE_ENV=production bankai examples/react.js --open",
     "test": "standard && npm run deps"
   },
   "dependencies": {
+    "nanocomponent-adapters-angular": "^1.0.1",
     "nanocomponent-adapters-angularjs": "^1.0.0"
   },
   "devDependencies": {

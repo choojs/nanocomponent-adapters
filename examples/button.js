@@ -1,8 +1,5 @@
 var Nanocomponent = require('nanocomponent')
-var reactDom = require('react-dom')
-var react = require('react')
 var html = require('bel')
-var toReact = require('./react')
 
 // create new nanocomponent
 function Button () {
@@ -31,7 +28,4 @@ Button.prototype.update = function ({newColor}) {
   return newColor !== this.color
 }
 
-var ReactButton = toReact(Button, react)
-var el = document.createElement('div')
-document.body.appendChild(el)
-reactDom.render(react.createElement(ReactButton, { color: 'green' }), el)
+module.exports = Button
