@@ -1,5 +1,5 @@
 module.exports.customElementV0 = require('./custom-element-v0')
 module.exports.customElementV1 = require('./custom-element-v1')
 module.exports.angularjs = require('nanocomponent-adapters-angularjs')
-module.exports.angular = require('./angular')
+module.exports.angular = require('nanocomponent-adapters-angular')
 module.exports.react = require('./react')
