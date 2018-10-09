@@ -1,7 +1,7 @@
 var Nanocomponent = require('nanocomponent')
 var reactDom = require('react-dom')
 var react = require('react')
-var html = require('bel')
+var html = require('nanohtml')
 var toReact = require('./react')
 
 // create new nanocomponent

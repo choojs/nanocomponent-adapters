@@ -5,19 +5,19 @@
   "version": "3.0.0",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
-    "start": "NODE_ENV=production bankai example --open",
+    "start": "bankai start example.js",
     "test": "standard && npm run deps"
   },
   "dependencies": {
     "nanocomponent-adapters-angularjs": "^1.0.0"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0",
-    "bankai": "^8.1.1",
-    "dependency-check": "^2.7.0",
-    "nanocomponent": "^6.0.0-1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "@angular/core": "^2.4.10",
+    "bankai": "^9.15.0",
+    "dependency-check": "^2.10.1",
+    "nanocomponent": "^6.5.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "standard": "^10.0.3"
   },
   "keywords": [
